@@ -8,6 +8,7 @@ const {
   deleteUser,
 } = require("../controllers/user");
 const authMiddleware = require("../middlewares/auth.middleware");
+const isAdmin = require("../middlewares/admin.middleware");
 
 // router
 const router = express.Router();
@@ -19,7 +20,7 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 // get all users
-router.get("/all", authMiddleware, getUsers);
+router.get("/all", authMiddleware, isAdmin, getUsers);
 
 // get an user
 router.get("/:userId", authMiddleware, getUser);
